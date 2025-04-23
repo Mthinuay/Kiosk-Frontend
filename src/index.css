@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -25,9 +29,12 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background: linear-gradient(135deg, #1f2937, #4b5563); /* gradient background */
+  transition: background-color 0.3s ease;
 }
 
 h1 {
@@ -54,6 +61,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Light mode overrides */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -65,8 +73,27 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+
+  body {
+    background: linear-gradient(135deg, #f8fafc, #e2e8f0); /* lighter gradient */
+  }
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Custom Tailwind utility layer */
+@layer utilities {
+  .animate-fade-in {
+    @apply opacity-0 translate-y-6 transition-all duration-700 ease-out;
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(1.5rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
